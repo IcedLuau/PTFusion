@@ -34,8 +34,8 @@ export type Version = Types.Version
 -- Down the line, this will be conditional based on whether Fusion is being
 -- compiled for Roblox.
 do
-	local RobloxExternal = require(script.RobloxExternal)
-	External.setExternalProvider(RobloxExternal)
+	local PolytoriaExternal = require(script.PolytoriaExternal)
+	External.setExternalProvider(PolytoriaExternal)
 end
 
 local Fusion: Fusion = table.freeze({
