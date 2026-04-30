@@ -13,6 +13,10 @@ and integration for anything else Luau.
 
 Piqued your interest? [Get going in minutes with our on-rails tutorial.](https://elttob.uk/Fusion/latest/tutorials)
 
+## Polytoria Specific
+
+PTFusion is a fork of Fusion with the most minimal tweaks to get it to run on Polytoria. Also, tweens are only linear. Technically you're not running 0.3 or 0.4, you're just running the latest build. Yay.
+
 ## License
 
 Fusion is licensed freely under MIT. Go do cool stuff with it, and if you feel
