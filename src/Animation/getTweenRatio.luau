@@ -3,15 +3,16 @@
 --!nolint LocalShadow
 local task = nil -- Disable usage of Roblox's task scheduler
 
+local Package = script.Parent.Parent
+local Types = require(Package.Types)
+
 --[[
 	Given a `tweenInfo` and `currentTime`, returns a ratio which can be used to
 	tween between two values over time.
 ]]
 
-local TweenService = game:GetService("TweenService")
-
 local function getTweenRatio(
-	tweenInfo: TweenInfo,
+	tweenInfo: Types.TweenInfo,
 	currentTime: number
 ): number
 	local delay = tweenInfo.DelayTime
@@ -40,7 +41,8 @@ local function getTweenRatio(
 	if tweenProgress > 1 then
 		tweenProgress = 2 - tweenProgress
 	end
-	local ratio = TweenService:GetValue(tweenProgress, easeStyle, easeDirection)
+	local ratio = tweenProgress -- TweenService:GetValue(tweenProgress, easeStyle, easeDirection)
+    -- forced linear. not a feauture.
 	return ratio
 end
 

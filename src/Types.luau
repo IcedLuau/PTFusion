@@ -18,28 +18,27 @@ export type Error = {
 -- Types that can be expressed as vectors of numbers, and so can be animated.
 export type Animatable =
 	number |
-	CFrame |
-	Color3 |
-	ColorSequenceKeypoint |
-	DateTime |
+	Quaternion |
+	Color |
+	ColorSeries |
 	NumberRange |
-	NumberSequenceKeypoint |
-	PhysicalProperties |
-	Ray |
-	Rect |
-	Region3 |
-	Region3int16 |
-	UDim |
-	UDim2 |
 	Vector2 |
-	Vector2int16 |
-	Vector3 |
-	Vector3int16
+	Vector3
+
+-- Types to replace roblox's tweeninfo
+export type TweenInfo = {
+    time: number,
+    easingStyle: string,
+    easingDirection: string,
+    repeatCount: number?,
+    reverses: boolean?,
+    delayTime: number?
+}
 
 -- A task which can be accepted for cleanup.
 export type Task =
 	Instance |
-	RBXScriptConnection |
+	PTSignalConnection |
 	() -> () |
 	{destroy: (unknown) -> ()} |
 	{Destroy: (unknown) -> ()} |
