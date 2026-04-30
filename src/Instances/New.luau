@@ -26,7 +26,7 @@ local function New(
 	return function(
 		props: Types.PropertyTable
 	): Instance
-		local ok, instance = pcall(Instance.new, className)
+		local ok, instance = pcall(Instance.New, className)
 		if not ok then
 			External.logError("cannotCreateClass", nil, className)
 		end
