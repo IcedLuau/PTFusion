@@ -3,11 +3,9 @@
 --!nolint LocalShadow
 
 --[[
-	Roblox implementation for Fusion's abstract provider layer.
+	Polytoria implementation for Fusion's abstract provider layer.
+    Probably really broken... but if it runs, it runs.
 ]]
-
-local RunService = game:GetService("RunService")
-local HttpService = game:GetService("HttpService")
 
 local Package = script.Parent
 local External = require(Package.External)
@@ -15,7 +13,7 @@ local External = require(Package.External)
 local RobloxExternal = {}
 
 RobloxExternal.policies = {
-	allowWebLinks = RunService:IsStudio()
+	allowWebLinks = world.IsLocalTest
 }
 
 --[[
@@ -24,7 +22,7 @@ RobloxExternal.policies = {
 function RobloxExternal.doTaskImmediate(
 	resume: () -> ()
 )
-   task.spawn(resume)
+   spawn(resume)
 end
 
 --[[
@@ -33,7 +31,10 @@ end
 function RobloxExternal.doTaskDeferred(
 	resume: () -> ()
 )
-	task.defer(resume)
+    spawn(function()
+        wait()
+        resume()
+    end)
 end
 
 --[[
@@ -42,13 +43,17 @@ end
 function RobloxExternal.logErrorNonFatal(
 	errorString: string
 )
-	task.spawn(error, errorString, 0)
+	spawn(function()
+        error(errorString, 0)
+    end)
 end
 
 --[[
 	Shows a warning message in the output.
 ]]
-RobloxExternal.logWarn = warn
+RobloxExternal.logWarn = function(...)
+    print("[color=#ffaa00]", ..., "[/b]") -- Logs support BBCode but no warn()
+end
 
 --[[
 	Sends an update step to Fusion using the Roblox clock time.
@@ -65,23 +70,9 @@ function RobloxExternal.startScheduler()
 	if stopSchedulerFunc ~= nil then
 		return
 	end
-	if RunService:IsClient() then
-		-- In cases where multiple Fusion modules are running simultaneously,
-		-- this prevents collisions.
-		local id = "FusionUpdateStep_" .. HttpService:GenerateGUID()
-		RunService:BindToRenderStep(
-			id,
-			Enum.RenderPriority.First.Value,
-			performUpdateStep
-		)
-		stopSchedulerFunc = function()
-			RunService:UnbindFromRenderStep(id)
-		end
-	else
-		local connection = RunService.Heartbeat:Connect(performUpdateStep)
-		stopSchedulerFunc = function()
-			connection:Disconnect()
-		end
+    local connection = world.Rendered:Connect(function() performUpdateStep() end)
+	stopSchedulerFunc = function()
+		connection:Disconnect()
 	end
 end
 
