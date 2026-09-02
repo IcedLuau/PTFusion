@@ -10,16 +10,16 @@
 local Package = script.Parent
 local External = require(Package.External)
 
-local RobloxExternal = {}
+local PolytoriaExternal = {}
 
-RobloxExternal.policies = {
+PolytoriaExternal.policies = {
 	allowWebLinks = world.IsLocalTest
 }
 
 --[[
    Sends an immediate task to the external provider. Throws if none is set.
 ]]
-function RobloxExternal.doTaskImmediate(
+function PolytoriaExternal.doTaskImmediate(
 	resume: () -> ()
 )
    spawn(resume)
@@ -28,7 +28,7 @@ end
 --[[
 	Sends a deferred task to the external provider. Throws if none is set.
 ]]
-function RobloxExternal.doTaskDeferred(
+function PolytoriaExternal.doTaskDeferred(
 	resume: () -> ()
 )
     spawn(function()
@@ -40,7 +40,7 @@ end
 --[[
 	Errors in a different thread to preserve the flow of execution.
 ]]
-function RobloxExternal.logErrorNonFatal(
+function PolytoriaExternal.logErrorNonFatal(
 	errorString: string
 )
 	spawn(function()
@@ -51,8 +51,8 @@ end
 --[[
 	Shows a warning message in the output.
 ]]
-RobloxExternal.logWarn = function(...)
-    print("[color=#ffaa00]", ..., "[/b]") -- Logs support BBCode but no warn()
+PolytoriaExternal.logWarn = function(...)
+    warn(...)
 end
 
 --[[
@@ -63,27 +63,27 @@ local function performUpdateStep()
 end
 
 --[[
-	Binds Fusion's update step to RunService step events.
+	Binds Fusion's update step to Updated step events.
 ]]
 local stopSchedulerFunc = nil :: (() -> ())?
-function RobloxExternal.startScheduler()
+function PolytoriaExternal.startScheduler()
 	if stopSchedulerFunc ~= nil then
 		return
 	end
-    local connection = world.Rendered:Connect(function() performUpdateStep() end)
+    local connection = HookService.Updated:Connect(function() performUpdateStep() end)
 	stopSchedulerFunc = function()
 		connection:Disconnect()
 	end
 end
 
 --[[
-	Unbinds Fusion's update step from RunService step events.
+	Unbinds Fusion's update step from Updated step events.
 ]]
-function RobloxExternal.stopScheduler()
+function PolytoriaExternal.stopScheduler()
 	if stopSchedulerFunc ~= nil then
 		stopSchedulerFunc()
 		stopSchedulerFunc = nil
 	end
 end
 
-return RobloxExternal
+return PolytoriaExternal
