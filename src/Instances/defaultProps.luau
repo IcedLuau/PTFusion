@@ -9,4 +9,11 @@ local task = nil -- Disable usage of Roblox's task scheduler
 ]]
 
 return {
+	UIField = {
+		PositionRelative = Vector2.Zero,
+		PositionOffset = Vector2.Zero,
+		SizeRelative = Vector2.Zero,
+		SizeOffset = Vector2.Zero,
+		PivotPoint = Vector3.Zero,
+	}
 }
