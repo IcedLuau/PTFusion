@@ -34,14 +34,14 @@ local function inverse(channel: number): number
 end
 
 -- Uses a transformation to convert linear RGB into sRGB.
-function sRGB.fromLinear(rgb: Color3): Color3
-    return Color3.new(inverse(rgb.R), inverse(rgb.G), inverse(rgb.B))
+function sRGB.fromLinear(rgb: Color): Color
+    return Color.New(inverse(rgb.R), inverse(rgb.G), inverse(rgb.B))
 end
 
 -- Converts an sRGB into linear RGB using a
 -- (The inverse of sRGB.fromLinear).
-function sRGB.toLinear(srgb: Color3): Color3
-    return Color3.new(transform(srgb.R), transform(srgb.G), transform(srgb.B))
+function sRGB.toLinear(srgb: Color): Color
+    return Color.New(transform(srgb.R), transform(srgb.G), transform(srgb.B))
 end
 
 return sRGB
