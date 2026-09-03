@@ -8,7 +8,7 @@ local task = nil -- Disable usage of Roblox's task scheduler
 	A task can be any of the following:
 
 	- an Instance - will be destroyed
-	- an RBXScriptConnection - will be disconnected
+	- a PTSignalConnection - will be disconnected
 	- a function - will be run
 	- a table with a `Destroy` or `destroy` function - will be called
 	- an array - `cleanup` will be called on each item
@@ -32,8 +32,8 @@ local function doCleanup(
 	if typeof(task) == "Instance" then
 		task:Destroy()
 
-	-- case 2: RBXScriptConnection
-	elseif typeof(task) == "RBXScriptConnection" then
+	-- case 2: PTSignalConnection
+	elseif typeof(task) == "PTSignalConnection" then
 		task:Disconnect()
 
 	-- case 3: callback
