@@ -25,18 +25,14 @@ local function packType(
 			false
 		)
 
-	elseif typeString == "DateTime" then
-		return DateTime.fromUnixTimestampMillis(numbers[1])
+	elseif typeString == "Quaternion" then
+		return Quaternion.New(numbers[1], numbers[2], numbers[3], numbers[4])
 
-	elseif typeString == "NumberRange" then
-		return NumberRange.New(numbers[1], numbers[2])
-
-	elseif typeString == "Region3" then -- TODO: port bounds. Also, Polytoria bounds objects use the least-XYZ corner as position
-		-- Bounds.New(pos, size) NOTE the capital N, as polytoria constructors do that
-		-- FUTURE: support rotated Region3s if/when they become constructable
-		local position = Vector3.new(numbers[1], numbers[2], numbers[3])
-		local halfSize = Vector3.new(numbers[4] / 2, numbers[5] / 2, numbers[6] / 2)
-		return Region3.new(position - halfSize, position + halfSize)
+	elseif typeString == "Bounds" then
+		-- Bounds takes position and size
+		local position = Vector3.New(numbers[1], numbers[2], numbers[3])
+		local size = Vector3.New(numbers[4], numbers[5], numbers[6])
+		return Bounds.New(position, size)
 
 	elseif typeString == "Vector2" then
 		return Vector2.New(numbers[1], numbers[2])
