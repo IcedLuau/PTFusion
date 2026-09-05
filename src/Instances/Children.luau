@@ -27,12 +27,8 @@ local function isInstance(child: unknown): boolean
 		return true
 	end
 	
-	-- Check for Polytoria instance
-	if typeof(child) == "table" then
-		local child = child :: {ObjectID: unknown?, NetworkedObjectID: unknown?}
-		if child.ObjectID ~= nil or child.NetworkedObjectID ~= nil then
-			return true
-		end
+	if child.ObjectID then
+		return true
 	end
 	
 	return false
