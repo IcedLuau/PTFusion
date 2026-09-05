@@ -11,20 +11,16 @@ local task = nil -- Disable usage of Roblox's task scheduler
 local function needsDestruction(
 	x: unknown
 ): boolean
-	-- Check for Roblox Instance
-	if typeof(x) == "Instance" then
-		return true
-	end
-	
-	-- Check for Polytoria instance (tables with ObjectID)
+	-- Check for Roblox Instance or Polytoria instance
 	if typeof(x) == "table" then
-		local x = x :: {ObjectID: unknown?}
-		if x.ObjectID ~= nil then
+		local x = x :: {ObjectID: unknown?, NetworkedObjectID: unknown?}
+		if x.ObjectID ~= nil or x.NetworkedObjectID ~= nil then
 			return true
 		end
 	end
 	
-	return false
+	-- Fallback for potential other Instance types
+	return typeof(x) == "Instance"
 end
 
 return needsDestruction
