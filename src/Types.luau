@@ -134,7 +134,7 @@ export type ForKeysConstructor =  <KI, KO, V, S>(
 ) -> For<KO, V>
 export type ForValuesConstructor =  <K, VI, VO, S>(
 	scope: S & Scope<unknown>,
-	inputTable: UsedAs<{[K]: VI}},
+	inputTable: UsedAs<{[K]: VI}>,
 	processor: (Use, S, value: VI) -> VO
 ) -> For<K, VO>
 
@@ -218,7 +218,7 @@ export type DeriveScopeConstructor = (<S>(Scope<S>) -> Scope<S>)
 	& (<S, A, B, C, D, E, F, G, H, I>(Scope<S>, A & {}, B & {}, C & {}, D & {}, E & {}, F & {}, G & {}, H & {}, I & {}) -> Scope<S & A & B & C & D & E & F & G & H & I>)
 	& (<S, A, B, C, D, E, F, G, H, I, J>(Scope<S>, A & {}, B & {}, C & {}, D & {}, E & {}, F & {}, G & {}, H & {}, I & {}, J & {}) -> Scope<S & A & B & C & D & E & F & G & H & I & J>)
 	& (<S, A, B, C, D, E, F, G, H, I, J, K>(Scope<S>, A & {}, B & {}, C & {}, D & {}, E & {}, F & {}, G & {}, H & {}, I & {}, J & {}, K & {}) -> Scope<S & A & B & C & D & E & F & G & H & I & J & K>)
-	& (<S, A, B, C, D, E, F, G, H, I, J, K, L>(Scope<S>, A & {}, B & {}, C & {}, D & {}, E & {}, F & {}, G & {}, H & {}, I & {}, J & {}, K & {}, L & {}) -> Scope<S & A & B & C & D & E & F & G & H & [...]
+	& (<S, A, B, C, D, E, F, G, H, I, J, K, L>(Scope<S>, A & {}, B & {}, C & {}, D & {}, E & {}, F & {}, G & {}, H & {}, I & {}, J & {}, K & {}, L & {}) -> Scope<S & A & B & C & D & E & F & G & H & I & J & K & L>)
 
 export type ScopedConstructor = (() -> Scope<{}>)
 	& (<A>(A & {}) -> Scope<A>)
