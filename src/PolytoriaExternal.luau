@@ -70,7 +70,7 @@ function PolytoriaExternal.startScheduler()
 	if stopSchedulerFunc ~= nil then
 		return
 	end
-    local connection = HookService.Updated:Connect(function() performUpdateStep() end)
+    local connection = Hooks.Updated:Connect(function() performUpdateStep() end)
 	stopSchedulerFunc = function()
 		connection:Disconnect()
 	end

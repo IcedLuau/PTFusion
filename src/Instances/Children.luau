@@ -21,6 +21,19 @@ type Set<T> = {[T]: unknown}
 -- Experimental flag: name children based on the key used in the [Children] table
 local EXPERIMENTAL_AUTO_NAMING = false
 
+local function isInstance(child: unknown): boolean
+	-- Check for Roblox Instance
+	if typeof(child) == "Instance" then
+		return true
+	end
+	
+	if child.ObjectID then
+		return true
+	end
+	
+	return false
+end
+
 return {
 	type = "SpecialKey",
 	kind = "Children",
@@ -49,9 +62,7 @@ return {
 				child: unknown,
 				autoName: string?
 			)
-				local childType = typeof(child)
-	
-				if childType == "Instance" then
+				if isInstance(child) then
 					-- case 1; single instance
 					local child = child :: Instance
 	
@@ -94,7 +105,7 @@ return {
 	
 					newScopes[child] = childScope
 	
-				elseif childType == "table" then
+				elseif typeof(child) == "table" then
 					-- case 3; table of objects
 					local child = child :: {[unknown]: unknown}
 	
@@ -114,7 +125,7 @@ return {
 					end
 	
 				else
-					External.logWarn("unrecognisedChildType", childType)
+					External.logWarn("unrecognisedChildType", typeof(child))
 				end
 			end
 	

@@ -37,7 +37,7 @@ local function OnEvent(
 				applyTo: Instance
 			)
 				local ok, event = pcall(getProperty_unsafe, applyTo, eventName)
-				if not ok or typeof(event) ~= "RBXScriptSignal" then
+				if not ok or typeof(event) ~= "PTSignal" then
 					External.logError("cannotConnectEvent", nil, applyTo.ClassName, eventName)
 				elseif typeof(callback) ~= "function" then
 					External.logError("invalidEventHandler", nil, eventName)

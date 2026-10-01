@@ -20,8 +20,7 @@ export type Animatable =
 	number |
 	Quaternion |
 	Color |
-	ColorSeries |
-	NumberRange |
+	Bounds |
 	Vector2 |
 	Vector3
 
