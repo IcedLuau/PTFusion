@@ -123,7 +123,7 @@ function checkLifetime.bOutlivesA<A, B, Args...>(
 	a: A,
 	scopeB: Types.Scope<unknown>?,
 	b: B,
-	formatter: (a: A, b: B, Args...) -> (string, string),
+	formatter: (a: A, b: B,Args...) -> (string, string),
 	...: Args...
 )
 	if scopeB == nil then

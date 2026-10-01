@@ -69,8 +69,8 @@ function class.is<T>(
 	function methods.during<T, A...>(
 		_: any, -- during is called with colon syntax but we don't care
 		callback: (A...) -> T,
-		...: A...
-	): T
+		...: A...	
+): T
 		local thread = coroutine.running()
 		local prevValue = self._valuesNow[thread]
 		-- Storing the value in this format allows us to distinguish storing

@@ -39,7 +39,7 @@ export type TweenInfo = {
 export type Task =
 	Instance |
 	PTSignalConnection |
-	() -> () |
+(	() -> () )|
 	{destroy: (unknown) -> ()} |
 	{Destroy: (unknown) -> ()} |
 	{disconnect: (unknown) -> ()} |
@@ -70,7 +70,7 @@ export type Contextual<T> = {
 }
 
 type ContextualIsMethods = {
-	during: <R, A...>(ContextualIsMethods, (A...) -> R, A...) -> R
+	during: <R, A...>(ContextualIsMethods, (A...) -> R,A...) -> R
 }
 
 -- A graph object which can have dependencies and dependencies.
@@ -192,7 +192,7 @@ export type SpecialKey = {
 export type Child = Instance | StateObject<Child> | {[unknown]: Child}
 
 -- A table that defines an instance's properties, handlers and children.
-export type PropertyTable = {[string | SpecialKey]: unknown}
+export type PropertyTable = {[(string | SpecialKey)]: unknown}
 
 export type NewConstructor = (
 	scope: Scope<unknown>,
@@ -253,7 +253,7 @@ export type Fusion = {
 	scoped: ScopedConstructor,
 	deriveScope: DeriveScopeConstructor,
 	innerScope: DeriveScopeConstructor,
-	insert: <Tasks...>(scope: Scope<unknown>, Tasks...) -> Tasks...,
+	insert: <Tasks...>(scope: Scope<unknown>,Tasks...) -> Tasks...,
 
 	peek: Use,
 	Value: ValueConstructor,
