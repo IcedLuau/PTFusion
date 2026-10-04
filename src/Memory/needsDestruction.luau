@@ -17,6 +17,8 @@ local function needsDestruction(
 			return true
 		end
 	end
+
+    return false
 end
 
 return needsDestruction
