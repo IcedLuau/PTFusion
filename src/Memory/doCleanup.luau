@@ -29,7 +29,7 @@ local function doCleanup(
 	alreadyDestroying[task] = true
 
 	-- case 1: Instance
-	if task.ObjectID or task.NetworkedObjectID then
+	if type(task) == "userdata" and task.ObjectID then
 		task:Destroy()
 
 	-- case 2: PTSignalConnection
