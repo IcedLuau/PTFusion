@@ -22,12 +22,11 @@ type Set<T> = {[T]: unknown}
 local EXPERIMENTAL_AUTO_NAMING = false
 
 local function isInstance(child: unknown): boolean
-	-- Check for Roblox Instance
 	if typeof(child) == "Instance" then
 		return true
 	end
 	
-	if child.ObjectID then
+	if type(child) == "userdata" and child.ObjectID then
 		return true
 	end
 	
